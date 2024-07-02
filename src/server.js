@@ -36,7 +36,7 @@ app.post("/books/addBook", (request, response) => {
   response.send(successResponse);
 });
 
-app.put("/books", (request, reponse) => {
+app.put("/books/putBooks", (request, response) => {
   // in here, find a book by title (i.e. an element of fakeArr where the element title is the same as request.body.title)
   // change (update) the author to an new name
 
