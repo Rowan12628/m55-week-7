@@ -34,7 +34,16 @@ const Book = mongoose.model("Book", bookSchema);
 
 //-- book model ends
 
-app.get("/books/getAllBooks", (request, response) => {});
+app.get("/books/getAllBooks", async (request, response) => {
+  const allBooks = await Book.find({});
+  console.log(allBooks);
+  const successResponse = {
+    message: "success",
+    allBooks: allBooks,
+  };
+
+  response.send(successResponse);
+});
 
 app.post("/books/addBook", async (request, response) => {
   const book = await Book.create({
