@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const bookRouter = Router();
 
-// const Book = require("./model");
+const Book = require("./model");
 
 const { getAllBooks } = require("./controllers");
 const { addBook } = require("./controllers");
@@ -15,5 +15,16 @@ bookRouter.post("/books/addBook", addBook);
 
 //putBooks
 bookRouter.put("/books/putBooks", putBooks);
+
+//delBooks
+bookRouter.delete("/books/delBooks", async (request, response) => {
+  const deleteBook = await Book.deleteOne({ title: request.body.title });
+
+  const successResponse = {
+    message: "success",
+    deleteBook: deleteBook,
+  };
+  response.send(successResponse);
+});
 
 module.exports = bookRouter;
