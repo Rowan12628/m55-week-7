@@ -1,11 +1,10 @@
 const { Router } = require("express");
 const bookRouter = Router();
 
-const Book = require("./model");
-
 const { getAllBooks } = require("./controllers");
 const { addBook } = require("./controllers");
 const { putBooks } = require("./controllers");
+const { delBooks } = require("./controllers");
 
 //getAllBooks
 bookRouter.get("/books/getAllBooks", getAllBooks); //reference function, don't call
@@ -17,14 +16,6 @@ bookRouter.post("/books/addBook", addBook);
 bookRouter.put("/books/putBooks", putBooks);
 
 //delBooks
-bookRouter.delete("/books/delBooks", async (request, response) => {
-  const deleteBook = await Book.deleteOne({ title: request.body.title });
-
-  const successResponse = {
-    message: "success",
-    deleteBook: deleteBook,
-  };
-  response.send(successResponse);
-});
+bookRouter.delete("/books/delBooks", delBooks);
 
 module.exports = bookRouter;

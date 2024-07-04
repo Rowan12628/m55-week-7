@@ -42,8 +42,20 @@ const putBooks = async (request, response) => {
   response.send(successResponse);
 };
 
+//delBooks
+const delBooks = async (request, response) => {
+  const deleteBook = await Book.deleteOne({ title: request.body.title });
+
+  const successResponse = {
+    message: "success",
+    deleteBook: deleteBook,
+  };
+  response.send(successResponse);
+};
+
 module.exports = {
   getAllBooks: getAllBooks,
   addBook: addBook,
   putBooks: putBooks,
+  delBooks: delBooks,
 };
