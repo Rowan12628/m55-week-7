@@ -5,23 +5,15 @@ const mongoose = require("mongoose");
 const connection = require("./db/connection");
 const Book = require("./books/model");
 
+const bookRouter = require("./books/routes");
+
 const app = express();
 
 app.use(express.json());
 
 connection();
 
-//get request
-app.get("/books/getAllBooks", async (request, response) => {
-  const allBooks = await Book.find({});
-  console.log(allBooks);
-  const successResponse = {
-    message: "success",
-    allBooks: allBooks,
-  };
-
-  response.send(successResponse);
-});
+app.use(bookRouter);
 
 //post request
 app.post("/books/addBook", async (request, response) => {
