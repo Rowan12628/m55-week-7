@@ -15,20 +15,6 @@ connection();
 
 app.use(bookRouter);
 
-//put request
-app.put("/books/putBooks", async (request, response) => {
-  const updateBook = await Book.updateOne(
-    { title: request.body.title },
-    { $set: { author: request.body.author } }
-  );
-
-  const successResponse = {
-    message: "success",
-    updateBook: updateBook,
-  };
-  response.send(successResponse);
-});
-
 //del request
 app.delete("/books/delBooks", async (request, response) => {
   const deleteBook = await Book.deleteOne({ title: request.body.title });
