@@ -34,6 +34,7 @@ const Book = mongoose.model("Book", bookSchema);
 
 //-- book model ends
 
+//get request
 app.get("/books/getAllBooks", async (request, response) => {
   const allBooks = await Book.find({});
   console.log(allBooks);
@@ -45,6 +46,7 @@ app.get("/books/getAllBooks", async (request, response) => {
   response.send(successResponse);
 });
 
+//post request
 app.post("/books/addBook", async (request, response) => {
   const book = await Book.create({
     title: request.body.title,
@@ -60,6 +62,7 @@ app.post("/books/addBook", async (request, response) => {
   response.send(successResponse);
 });
 
+//put request
 app.put("/books/putBooks", async (request, response) => {
   const updateBook = await Book.updateOne(
     { title: request.body.title },
@@ -73,6 +76,7 @@ app.put("/books/putBooks", async (request, response) => {
   response.send(successResponse);
 });
 
+//del request
 app.delete("/books/delBooks", async (request, response) => {
   const deleteBook = await Book.deleteOne({ title: request.body.title });
 
