@@ -60,9 +60,28 @@ app.post("/books/addBook", async (request, response) => {
   response.send(successResponse);
 });
 
-app.put("/books/putBooks", (request, response) => {});
+app.put("/books/putBooks", async (request, response) => {
+  const updateBook = await Book.updateOne(
+    { title: request.body.title },
+    { $set: { author: request.body.author } }
+  );
 
-app.delete("/books/delBooks", (request, response) => {});
+  const successResponse = {
+    message: "success",
+    updateBook: updateBook,
+  };
+  response.send(successResponse);
+});
+
+app.delete("/books/delBooks", async (request, response) => {
+  const deleteBook = await Book.deleteOne({ title: request.body.title });
+
+  const successResponse = {
+    message: "success",
+    deleteBook: deleteBook,
+  };
+  response.send(successResponse);
+});
 
 app.listen(5001, () => {
   console.log(`Server is listening on port 5001`);
